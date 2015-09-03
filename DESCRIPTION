@@ -1,8 +1,8 @@
 Package: ffraster
-Title: What the Package Does (one line, title case)
+Title: Create Native raster Files With ff
 Version: 0.0.0.9000
 Authors@R: person("Michael D.","Sumner", role = c("aut", "cre"), email = "mdsumner@gmail.com")
-Description: What the package does (one paragraph)
-Depends: R (>= 3.2.2)
+Description: Couplings between raster and ff files. 
+Depends: R (>= 3.2.2), ff, raster
 License: GPL-3
 LazyData: true
