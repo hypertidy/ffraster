@@ -1,8 +1,8 @@
 library(raster)
-d <- brick("\\\\aad.gov.au/files/AADC/Scientific_Data/Data/gridded_new/data/topex.ucsd.edu/pub/global_topo_1min/.vrt/topo_18.1.vrt")
+d <- brick("data/topex.ucsd.edu/pub/global_topo_1min/.vrt/topo_18.1.vrt")
 
 
-f <- "\\\\aad.gov.au/files/AADC/Scientific_Data/Data/gridded_new/data/topex.ucsd.edu/pub/global_topo_1min/topo_18.1.img"
+f <- "data/topex.ucsd.edu/pub/global_topo_1min/topo_18.1.img"
 rawf <- file(f, open = "rb")
 
 
