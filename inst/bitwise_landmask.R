@@ -1,3 +1,9 @@
+## plan, topo package
+## code to obtain topo data sets, leverage raadysync? 
+## code to build land masks and radically compress
+## package ready to use with built-in polar and equal angle land mask
+## provides masking functions 
+
 library(raster)
 d <- brick("data/topex.ucsd.edu/pub/global_topo_1min/.vrt/topo_18.1.vrt")
 
