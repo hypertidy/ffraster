@@ -33,7 +33,8 @@ ffrarr <- function(dim, mode, filename) {
 }
 
 #' @importFrom raster xmin ymin xmax ymax projection nlayers trim minValue maxValue getZ
-.writeGRD <- function (x, type = "raster", filename = NULL, dataType = NULL, byteorder = "little", bandorder = "BIL") 
+.writeGRD <- function (x, type = "raster", filename = NULL, dataType = NULL, byteorder = "little", bandorder = "BIL", 
+                       nbands = NULL, dates = NULL) 
 {
   rastergrd <- raster:::.setFileExtensionHeader(filename, type)
   thefile <- file(rastergrd, "w")
@@ -58,7 +59,22 @@ ffrarr <- function(dim, mode, filename) {
       sep = "")
   cat("byteorder=", byteorder, "\n", file = thefile, 
       sep = "")
-  nl <- nlayers(x)
+  if (is.null(nbands)) {
+    nl <- nlayers(x)
+    miv <- paste(minValue(x, -1, warn = FALSE), collapse = ":")
+    mav <- paste(maxValue(x, -1, warn = FALSE), collapse = ":")
+    ln <- gsub(":", ".", names(x))
+    ln <-  paste(ln, collapse = ":")
+    
+    
+  } else {
+    nl <- nbands
+    miv <- paste(rep(minValue(x, -1, warn = FALSE), nbands), collapse = ":")
+    mav <- paste(rep(maxValue(x, -1, warn = FALSE), nbands), collapse = ":")
+    ln <- gsub(":", ".", names(x))
+    ln <-  paste(paste(ln, seq(nbands), sep = "."), collapse = ":")
+    
+   }
   cat("nbands=", nl, "\n", file = thefile, sep = "")
   cat("bandorder=", bandorder, "\n", file = thefile, 
       sep = "")
@@ -80,9 +96,9 @@ ffrarr <- function(dim, mode, filename) {
           "\n", file = thefile, sep = "")
     }
   }
-  cat("minvalue=", paste(minValue(x, -1, warn = FALSE), collapse = ":"), 
+  cat("minvalue=", miv, 
       "\n", file = thefile, sep = "")
-  cat("maxvalue=", paste(maxValue(x, -1, warn = FALSE), collapse = ":"), 
+  cat("maxvalue=", mav, 
       "\n", file = thefile, sep = "")
   cat("nodatavalue=", raster:::.nodatavalue(x), "\n", file = thefile, 
       sep = "")
@@ -93,10 +109,14 @@ ffrarr <- function(dim, mode, filename) {
   #  cat("color=", paste(x@legend@color, collapse = ":"), "\n", 
   #      file = thefile, sep = "")
   cat("[description]", "\n", file = thefile, sep = "")
-  ln <- gsub(":", ".", names(x))
-  cat("layername=", paste(ln, collapse = ":"), "\n", file = thefile, 
+  
+  cat("layername=", ln, "\n", file = thefile, 
       sep = "")
   z <- getZ(x)
+  if (!is.null(nbands)) {
+    if (is.null(dates)) stop("nbands also needs dates input")
+    z <- dates
+  }
   if (!is.null(z)) {
     zname <- names(x@z)[1]
     if (is.null(zname)) {
