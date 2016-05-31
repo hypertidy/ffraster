@@ -2,6 +2,7 @@
 
 export(ffrarr)
 importFrom(ff,ff)
+importFrom(raster,"extension<-")
 importFrom(raster,getZ)
 importFrom(raster,maxValue)
 importFrom(raster,minValue)

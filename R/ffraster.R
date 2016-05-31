@@ -5,8 +5,7 @@
 #'
 #' For mapping between raster and ff types, see \code{\link[ff]{vmode}} and \code{\link[raster]{dataType}}
 #' @param dim dimensions in Raster order (nrow, ncol, nlayer)
-#' @param mode ff data mode see details
-#' @param dataType raster dataType, see Details
+#' @param mode ff data mode see detailss
 #' @param filename file name as per \code{\link{writeRaster}}
 #' @importFrom ff ff
 #' @importFrom raster raster
@@ -32,11 +31,50 @@ ffrarr <- function(dim, mode, filename) {
   ff(dim = vdim, vmode = vm, dimorder = dimo, filename = gsub("grd$", "gri", filename))
 }
 
+
+raster_.nodatavalue <- 
+  function (object) 
+  {
+    if (inherits(object, "RasterStack")) {
+      return(sapply(object@layers, function(x) x@file@nodatavalue))
+    }
+    return(object@file@nodatavalue)
+  }
+
+#' @importFrom raster extension<- 
+raster_.setFileExtensionHeader <- 
+  function (fname, type = "raster") 
+  {
+    if (type == "raster") {
+      extension(fname) <- ".grd"
+    }
+    else if (type == "SAGA") {
+      extension(fname) <- "sgrd"
+    }
+    else if (type == "IDRISI") {
+      extension(fname) <- ".rdc"
+    }
+    else if (type == "IDRISIold") {
+      extension(fname) <- ".doc"
+    }
+    else if (type %in% c("BIL", "BSQ", "BIP")) {
+      extension(fname) <- ".hdr"
+    }
+    else if (type == "big.matrix") {
+      extension(fname) <- ".brd"
+    }
+    else {
+      stop("unknown file format")
+    }
+    return(fname)
+  }
+
+
 #' @importFrom raster xmin ymin xmax ymax projection nlayers trim minValue maxValue getZ
 .writeGRD <- function (x, type = "raster", filename = NULL, dataType = NULL, byteorder = "little", bandorder = "BIL", 
                        nbands = NULL, dates = NULL) 
 {
-  rastergrd <- raster:::.setFileExtensionHeader(filename, type)
+  rastergrd <- raster_.setFileExtensionHeader(filename, type)
   thefile <- file(rastergrd, "w")
   cat("[general]", "\n", file = thefile, sep = "")
   cat("creator=R package 'raster'", "\n", file = thefile, sep = "")
@@ -100,7 +138,8 @@ ffrarr <- function(dim, mode, filename) {
       "\n", file = thefile, sep = "")
   cat("maxvalue=", mav, 
       "\n", file = thefile, sep = "")
-  cat("nodatavalue=", raster:::.nodatavalue(x), "\n", file = thefile, 
+ 
+  cat("nodatavalue=", raster_.nodatavalue(x), "\n", file = thefile, 
       sep = "")
   cat("[legend]", "\n", file = thefile, sep = "")
   # cat("legendtype=", x@legend@type, "\n", file = thefile, sep = "")

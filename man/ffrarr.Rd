@@ -9,11 +9,9 @@ ffrarr(dim, mode, filename)
 \arguments{
 \item{dim}{dimensions in Raster order (nrow, ncol, nlayer)}
 
-\item{mode}{ff data mode see details}
+\item{mode}{ff data mode see detailss}
 
 \item{filename}{file name as per \code{\link{writeRaster}}}
-
-\item{dataType}{raster dataType, see Details}
 }
 \value{
 ff
