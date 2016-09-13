@@ -1,12 +1,15 @@
 Package: ffraster
 Title: Create Native raster Files With ff
-Version: 0.0.0.9000
+Version: 0.0.1
 Authors@R: person("Michael D.","Sumner", role = c("aut", "cre"), email = "mdsumner@gmail.com")
 Description: Couplings between raster and ff files.
 Depends:
-    R (>= 3.2.2),
+    R (>= 3.2.2)
+Imports: 
     ff,
     raster
 License: GPL-3
 LazyData: true
 RoxygenNote: 5.0.1
+Suggests: covr,
+    testthat
