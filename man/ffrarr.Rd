@@ -4,33 +4,30 @@
 \alias{ffrarr}
 \title{ffraster}
 \usage{
-ffrarr(dim, mode, filename)
+ffrarr(dim, mode, filename, readonly = TRUE)
 }
 \arguments{
 \item{dim}{dimensions in Raster order (nrow, ncol, nlayer)}
 
-\item{mode}{ff data mode see detailss}
+\item{mode}{ff data mode see details}
 
 \item{filename}{file name as per \code{\link{writeRaster}}}
+
+\item{readonly}{open in readonly mode (TRUE is default)}
 }
 \value{
 ff
 }
 \description{
-Build a ff array to be used as a raster.
-}
-\details{
+Build a ff array to be used as a raster. 
 For mapping between raster and ff types, see \code{\link[ff]{vmode}} and \code{\link[raster]{dataType}}
 }
 \examples{
-
 mat <- volcano
 library(raster)
 b <- brick(raster(mat), raster(mat), raster(mat))
 fn <- rasterTmpFile()
-dt <- "INT1U"
+dt <- "byte"
 ffraster:::.writeGRD(b, dataType = dt, filename = fn)
-a <- ffrarr(dim(b), mode = dt, filename = fn)
-
+a <- ffrarr(dim(b), mode = dt, filename = fn, readonly = FALSE)
 }
-

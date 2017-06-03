@@ -1,35 +1,99 @@
 
+#' Raster and 'ff' file-backed arrays
+#' 
+#' Create an file-backed 'ff' object from a raster, or a raster-enabled file. 
+#'
+#' When the object is created from a filename, `raster::brick` is used. The 'dim'ension
+#' for raster and for ff in this context always keeps degenerate singletons. Please
+#' get in touch if this causes you problems. 
+#'
+#' @param x raster or raster-able file
+#' @param ... arguments to methods
+#' @param readonly open in read-only mode (TRUE by default)
+#' @param filename path to file to create
+#'
+#' @return `ff` object
+#' @export
+#'
+#' @examples
+#' f <- system.file("extdata", "raster", "sst.grd", package  = "ffraster")
+#' ff_object(raster::brick(f))
+#' if (interactive()) {
+#'   arr <- ff_object(f, filename = "afile.grd")
+#'  }
+ff_object <- function(x, readonly = TRUE, filename = NULL, ...) {
+  UseMethod("ff_object")
+}
+#' @name ff_object
+#' @export
+#' @importFrom raster filename
+ff_object.BasicRaster <- function(x, readonly = TRUE, filename = NULL, ...) {
+  ini <- try(ini_file(x))
+  if (inherits(ini, "try-error")) {
+    print("cannot interpret backing file for this object")
+    
+    print(x)
+    stop("\n\n--end--")
+  }
+  # set up data dimensions and order
+    vdim <- dim(x)
+  # bit of overkill to work with n-D
+  if(vdim[length(vdim)] < 2) vdim <- vdim[length(vdim)-1]
+  dimo <- seq_along(vdim)[c(seq_along(vdim)[-1], 1)]
+  ff(dim = dim(x), 
+     vmode = ff_type(x), 
+     dimorder = dimo, 
+     readonly = readonly, 
+     filename = gsub("grd$", "gri", raster::filename(x)))
+}
+#' @name ff_object
+#' @export
+#' @importFrom yesno yesno
+ff_object.character <- function(x, readonly = TRUE, filename = NULL, ...)  {
+  if (is.null(filename)) {
+    stop("please specify a filename, must end in \".grd\"")
+  }
+  answer <- yesno::yesno("do you want to create a raster and write this object to a new file?", 
+      "\n", filename)
+  if (!answer) {return(invisible(NULL))}
+
+  ff_object(raster::brick(x, filename = filename))
+}
+
+
 #' ffraster
 #' 
 #' Build a ff array to be used as a raster. 
-#'
+##
 #' For mapping between raster and ff types, see \code{\link[ff]{vmode}} and \code{\link[raster]{dataType}}
+##
 #' @param dim dimensions in Raster order (nrow, ncol, nlayer)
-#' @param mode ff data mode see detailss
+#' @param mode ff data mode see details
+#' @param readonly open in readonly mode (TRUE is default)
 #' @param filename file name as per \code{\link{writeRaster}}
 #' @importFrom ff ff
 #' @importFrom raster raster
 #' @return ff
 #' @export
 #' @examples
-#' 
 #' mat <- volcano
 #' library(raster)
 #' b <- brick(raster(mat), raster(mat), raster(mat))
 #' fn <- rasterTmpFile()
-#' dt <- "INT1U"
+#' dt <- "byte"
 #' ffraster:::.writeGRD(b, dataType = dt, filename = fn)
-#' a <- ffrarr(dim(b), mode = dt, filename = fn)
-#' 
-ffrarr <- function(dim, mode, filename) {
-  ## set up data dimensions and order
+#' a <- ffrarr(dim(b), mode = dt, filename = fn, readonly = FALSE)
+ffrarr <- function(dim, mode, filename, readonly = TRUE) {
+    # set up data dimensions and order
   vdim <- dim
   vm <- c(INT1U = "ubyte", FLT4S = "single", FLT8S = "double")[mode]
-  ## bit of overkill to work with n-D
+   vm <- mode
+  # bit of overkill to work with n-D
   if(vdim[length(vdim)] < 2) vdim <- vdim[length(vdim)-1]
   dimo <- seq_along(vdim)[c(seq_along(vdim)[-1], 1)]
-  ff(dim = vdim, vmode = vm, dimorder = dimo, filename = gsub("grd$", "gri", filename))
+  ff(dim = vdim, vmode = vm, dimorder = dimo, readonly = readonly, filename = gsub("grd$", "gri", filename))
 }
+
 
 
 raster_.nodatavalue <- 

@@ -6,3 +6,5 @@
 ^appveyor\.yml$
 ^CONDUCT\.md$
 ^codecov\.yml$
+^data-raw$
+^docs$

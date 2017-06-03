@@ -20,5 +20,16 @@ knitr::opts_chunk$set(
 ```
 
 
+ffraster allows loading a file-backed raster as an `ff` object. 
+
+```{r, eval= FALSE}
+library(raster)
+
+b <_ brick("/some/huge/brick.grd")
+
+library(ffraster)
+ff_object(b)
+
+```
 
 Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
