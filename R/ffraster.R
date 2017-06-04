@@ -37,14 +37,15 @@ ff_object.BasicRaster <- function(x, readonly = TRUE, filename = NULL, ...) {
   }
   # set up data dimensions and order
     vdim <- dim(x)
-  # bit of overkill to work with n-D
-  if(vdim[length(vdim)] < 2) vdim <- vdim[length(vdim)-1]
-  dimo <- seq_along(vdim)[c(seq_along(vdim)[-1], 1)]
-  ff(dim = dim(x), 
+  dimo <- dim_order(x)
+  ff_out <- ff(dim = dim(x), 
      vmode = ff_type(x), 
      dimorder = dimo, 
      readonly = readonly, 
-     filename = gsub("grd$", "gri", raster::filename(x)))
+     filename = gri_filename(x))
+    ## now the virtual dim order must always be column-
+  #ff::dimorder(ff_out) <- seq_along(dimo)
+  ff_out
 }
 #' @name ff_object
 #' @export

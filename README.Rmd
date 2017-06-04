@@ -32,4 +32,8 @@ ff_object(b)
 
 ```
 
+Please see related work in library mmap, in GDAL virtualmem, VRT-linked binary, GDAL driver for R-raster, R packages ff, spatial.tools, mmap,  bigmemory, rasterfaster, Manifold's Raw Binary surface, and Radian. 
+
+
+
 Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
