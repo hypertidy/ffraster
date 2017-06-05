@@ -6,6 +6,11 @@
 \usage{
 tidyff(x, ...)
 }
+\arguments{
+\item{x}{object}
+
+\item{...}{ignored}
+}
 \description{
 Tidy ff
 }

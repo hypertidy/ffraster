@@ -65,8 +65,6 @@ gri_filename <- function(x) {
 #'
 #' @return type of ff, see `ff::vmode`
 #' @export
-#'
-#' @examples
 ff_type <- function(x, ...) {
   UseMethod("ff_type")
 }
@@ -97,7 +95,7 @@ ff_type.raster_ini <- function(x, ...) {
 #' 
 #' @param x file name or raster
 #'
-#' @return
+#' @return ini object from raster native binary
 #' @export
 #'
 #' @examples

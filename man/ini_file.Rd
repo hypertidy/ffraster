@@ -17,6 +17,9 @@ ini_file(x)
 \arguments{
 \item{x}{file name or raster}
 }
+\value{
+ini object from raster native binary
+}
 \description{
 Read the configuration file in raw list form, you can 
 use either the filename (.grd) or a raster object.
