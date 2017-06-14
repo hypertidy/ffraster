@@ -29,3 +29,6 @@ type of ff, see `ff::vmode`
 \description{
 ff type from raster type
 }
+\examples{
+ff_type("LOG1S")
+}
