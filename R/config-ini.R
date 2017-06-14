@@ -67,6 +67,7 @@ gri_filename <- function(x) {
 #' @export
 #'
 #' @examples
+#' ff_type("LOG1S")
 ff_type <- function(x, ...) {
   UseMethod("ff_type")
 }
