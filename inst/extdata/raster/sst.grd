@@ -1,0 +1,25 @@
+[general]
+creator=R package 'raster'
+created=2017-06-04 01:04:46
+[georeference]
+nrows=16
+ncols=8
+xmin=143
+ymin=-47
+xmax=145
+ymax=-43
+projection=+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0
+[data]
+datatype=FLT8S
+byteorder=little
+nbands=10
+bandorder=BIL
+minvalue=10.9699997548014:11.8899997342378:11.9099997337908:11.8799997344613:11.5099997427315:11.5799997411668:11.5599997416139:11.76999973692:11.6699997391552:11.5899997409433
+maxvalue=13.9199996888638:14.4399996772408:13.9999996870756:13.9599996879697:14.3899996783584:14.1199996843934:13.7299996931106:13.9199996888638:13.7699996922165:13.6699996944517
+nodatavalue=-1.7e+308
+[legend]
+legendtype=
+values=
+color=
+[description]
+layername=Daily.sea.surface.temperature.1:Daily.sea.surface.temperature.2:Daily.sea.surface.temperature.3:Daily.sea.surface.temperature.4:Daily.sea.surface.temperature.5:Daily.sea.surface.temperature.6:Daily.sea.surface.temperature.7:Daily.sea.surface.temperature.8:Daily.sea.surface.temperature.9:Daily.sea.surface.temperature.10
