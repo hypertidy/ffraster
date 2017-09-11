@@ -58,7 +58,7 @@ ff_object.character <- function(x, readonly = TRUE, filename = NULL, ...)  {
       "\n", filename)
   if (!answer) {return(invisible(NULL))}
 
-  ff_object(raster::brick(x, filename = filename))
+  ff_object(raster::brick(x, filename = filename), readonly = readonly, ...)
 }
 
 

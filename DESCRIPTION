@@ -1,8 +1,9 @@
 Package: ffraster
-Title: Create Native raster Files With ff
+Title: Native Raster Files
 Version: 0.0.1.9001
 Authors@R: person("Michael D.","Sumner", role = c("aut", "cre"), email = "mdsumner@gmail.com")
-Description: Couplings between raster and ff files.
+Description: Provides a loose couplings between the facilities of `raster` and `ff`, to allow
+ a file-backed raster grid to be modified as if it were an array in memory. 
 Depends:
     R (>= 3.3.0)
 Imports:
