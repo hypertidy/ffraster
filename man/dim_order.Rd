@@ -2,9 +2,7 @@
 % Please edit documentation in R/config-ini.R
 \name{dim_order}
 \alias{dim_order}
-\alias{dim_order}
 \alias{dim_order.BasicRaster}
-\alias{dim_order}
 \alias{dim_order.character}
 \title{dimension order}
 \usage{

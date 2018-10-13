@@ -2,11 +2,8 @@
 % Please edit documentation in R/config-ini.R
 \name{ff_type}
 \alias{ff_type}
-\alias{ff_type}
 \alias{ff_type.character}
-\alias{ff_type}
 \alias{ff_type.BasicRaster}
-\alias{ff_type}
 \alias{ff_type.raster_ini}
 \title{ff type from raster type}
 \usage{

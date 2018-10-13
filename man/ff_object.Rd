@@ -2,15 +2,14 @@
 % Please edit documentation in R/ffraster.R
 \name{ff_object}
 \alias{ff_object}
-\alias{ff_object}
 \alias{ff_object.BasicRaster}
-\alias{ff_object}
 \alias{ff_object.character}
 \title{Raster and 'ff' file-backed arrays}
 \usage{
 ff_object(x, readonly = TRUE, filename = NULL, ...)
 
-\method{ff_object}{BasicRaster}(x, readonly = TRUE, filename = NULL, ...)
+\method{ff_object}{BasicRaster}(x, readonly = TRUE, filename = NULL,
+  ...)
 
 \method{ff_object}{character}(x, readonly = TRUE, filename = NULL, ...)
 }

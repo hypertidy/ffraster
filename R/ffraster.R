@@ -137,8 +137,9 @@ raster_.setFileExtensionHeader <-
 
 #' @importFrom raster xmin ymin xmax ymax projection nlayers trim minValue maxValue getZ
 .writeGRD <- function (x, type = "raster", filename = NULL, dataType = NULL, byteorder = "little", bandorder = "BIL", 
-                       nbands = NULL, dates = NULL) 
+                       nbands = NULL, dates = NULL, overwrite = FALSE) 
 {
+  if (file.exists(filename) && !overwrite) stop("'filename' exists, use a different file or set 'overwrite = TRUE'")
   rastergrd <- raster_.setFileExtensionHeader(filename, type)
   thefile <- file(rastergrd, "w")
   cat("[general]", "\n", file = thefile, sep = "")
@@ -218,7 +219,7 @@ raster_.setFileExtensionHeader <-
       sep = "")
   z <- getZ(x)
   if (!is.null(nbands)) {
-    if (is.null(dates)) stop("nbands also needs dates input")
+    if (is.null(dates)) dates <- seq_len(nbands)
     z <- dates
   }
   if (!is.null(z)) {

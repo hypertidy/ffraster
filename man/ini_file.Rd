@@ -2,9 +2,7 @@
 % Please edit documentation in R/config-ini.R
 \name{ini_file}
 \alias{ini_file}
-\alias{ini_file}
 \alias{ini_file.character}
-\alias{ini_file}
 \alias{ini_file.BasicRaster}
 \title{raster ini file}
 \usage{
