@@ -19,12 +19,12 @@ knitr::opts_chunk$set(
 ```
 
 
-ffraster allows loading a file-backed raster as an `ff` object. 
+ffraster allows loading a file-backed raster as an `ff` object, and some wrappers to deal with the [rasterfile format](https://cran.r-project.org/web/packages/raster/vignettes/rasterfile.pdf) using ff's array abstractions linked to a file on disk.  
 
 ```{r, eval= FALSE}
 library(raster)
 
-b <_ brick("/some/huge/brick.grd")
+b <- brick("/some/huge/brick.grd")
 
 library(ffraster)
 ff_object(b)
@@ -55,7 +55,6 @@ Now set up the .grd metadata file and a ff-array as an interface to the raw bina
 library(raster)
 ## we'll create a brick layer by layer in this file (.grd/.gri)
 r_brickfile <- rasterTmpFile()
-library(dplyr)
 ## we need the first layer to initiate the target as a template
 r0 <- raster(files[1])
 

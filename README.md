@@ -8,12 +8,15 @@ Status](https://ci.appveyor.com/api/projects/status/github/mdsumner/ffraster?bra
 [![Coverage
 Status](https://img.shields.io/codecov/c/github/mdsumner/ffraster/master.svg)](https://codecov.io/github/mdsumner/ffraster?branch=master)
 
-ffraster allows loading a file-backed raster as an `ff` object.
+ffraster allows loading a file-backed raster as an `ff` object, and some
+wrappers to deal with the [rasterfile
+format](https://cran.r-project.org/web/packages/raster/vignettes/rasterfile.pdf)
+using ff’s array abstractions linked to a file on disk.
 
 ``` r
 library(raster)
 
-b <_ brick("/some/huge/brick.grd")
+b <- brick("/some/huge/brick.grd")
 
 library(ffraster)
 ff_object(b)
@@ -47,18 +50,6 @@ library(raster)
 #> Loading required package: sp
 ## we'll create a brick layer by layer in this file (.grd/.gri)
 r_brickfile <- rasterTmpFile()
-library(dplyr)
-#> 
-#> Attaching package: 'dplyr'
-#> The following objects are masked from 'package:raster':
-#> 
-#>     intersect, select, union
-#> The following objects are masked from 'package:stats':
-#> 
-#>     filter, lag
-#> The following objects are masked from 'package:base':
-#> 
-#>     intersect, setdiff, setequal, union
 ## we need the first layer to initiate the target as a template
 r0 <- raster(files[1])
 #> Loading required namespace: ncdf4
