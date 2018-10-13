@@ -2,11 +2,11 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 [![Travis-CI Build
-Status](https://travis-ci.org/mdsumner/ffraster.svg?branch=master)](https://travis-ci.org/mdsumner/ffraster)
+Status](https://travis-ci.org/hypertidy/ffraster.svg?branch=master)](https://travis-ci.org/hypertidy/ffraster)
 [![AppVeyor Build
 Status](https://ci.appveyor.com/api/projects/status/github/mdsumner/ffraster?branch=master&svg=true)](https://ci.appveyor.com/project/mdsumner/ffraster)
 [![Coverage
-Status](https://img.shields.io/codecov/c/github/mdsumner/ffraster/master.svg)](https://codecov.io/github/mdsumner/ffraster?branch=master)
+Status](https://img.shields.io/codecov/c/github/hypertidy/ffraster/master.svg)](https://codecov.io/github/hypertidy/ffraster?branch=master)
 
 ffraster allows loading a file-backed raster as an `ff` object, and some
 wrappers to deal with the [rasterfile
