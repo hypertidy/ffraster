@@ -22,9 +22,13 @@ library(ffraster)
 ff_object(b)
 ```
 
-Please see related work in library mmap, in GDAL virtualmem, VRT-linked
-binary, GDAL driver for R-raster, R packages ff, spatial.tools, mmap,
-bigmemory, rasterfaster, Manifold’s Raw Binary surface, and Radian.
+ffraster tries to solve the following problem, posed by raster’s native
+binary “rasterfile” format for long time series.
+
+  - a multilayer rasterfile can only be created from an existing
+    multi-layer raster
+  - setting the values of a rasterfile for a given layer reads all the
+    data into memory and cuts the link to the rasterfile
 
 # Applications
 
@@ -94,6 +98,10 @@ plot(stack(files), zlim = c(36, 365))
 ```
 
 ![](README-ff-layers-2.png)<!-- -->
+
+See related work in library mmap, in GDAL virtualmem, VRT-linked binary,
+GDAL driver for R-raster, R packages ff, matter, spatial.tools, mmap,
+bigmemory, rasterfaster, Manifold’s Raw Binary surface.
 
 Please note that this project is released with a [Contributor Code of
 Conduct](CONDUCT.md). By participating in this project you agree to

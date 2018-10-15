@@ -92,6 +92,7 @@ ffrarr <- function(dim, mode, filename, readonly = TRUE) {
   # bit of overkill to work with n-D
   if(vdim[length(vdim)] < 2) vdim <- vdim[length(vdim)-1]
   dimo <- seq_along(vdim)[c(seq_along(vdim)[-1], 1)]
+  # dimo <- c(3, 1, 2)
   ff(dim = vdim, vmode = vm, dimorder = dimo, readonly = readonly, filename = gsub("grd$", "gri", filename))
 }
 
@@ -140,6 +141,12 @@ raster_.setFileExtensionHeader <-
                        nbands = NULL, dates = NULL, overwrite = FALSE) 
 {
   if (file.exists(filename) && !overwrite) stop("'filename' exists, use a different file or set 'overwrite = TRUE'")
+  if (overwrite) {
+    unlink(filename)
+    binfilename <- gsub("grd$", "gri", filename)
+
+    if (file.exists(binfilename)) unlink(binfilename)
+  }
   rastergrd <- raster_.setFileExtensionHeader(filename, type)
   thefile <- file(rastergrd, "w")
   cat("[general]", "\n", file = thefile, sep = "")
